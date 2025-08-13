@@ -7,6 +7,9 @@ import SignupPage from "./pages/SignupPage";
 import CreatePostPage from "./pages/CreatePostPage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import VerifyEmailPage from "./pages/VerifyEmailPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage"
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ProtectedRoute from "./ui_components/ProtectedRoute";
 import { useEffect, useState } from "react"
 import {
@@ -47,6 +50,9 @@ const App = () => {
             <Route path="create_blog" element={ <ProtectedRoute> <CreatePostPage IsAuthenticated={IsAuthenticated} /> </ProtectedRoute> } />
             <Route path="login" element={ <LoginPage setIsAuthenticated={ setIsAuthenticated } setUsername={setUsername} /> } />
             <Route path="profile/:username" element={<ProfilePage authUsername={username} /> } />
+            <Route path="verify_email" element={<VerifyEmailPage />} />
+            <Route path="reset_password/:uidb64/:token" element={<ResetPasswordPage />} />
+            <Route path="reset_password_request" element={<ForgotPasswordPage />} />
             
           </Route>
         </Routes>

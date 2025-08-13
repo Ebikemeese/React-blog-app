@@ -33,7 +33,7 @@ export async function registerUser(data){
         if(err.status == 400){
           throw new Error("Email already exists")
         }
-        throw new Error(err)
+        throw new Error(err.response?.data?.message || "Something went wrong. Please try again.");
     }
 }
 
@@ -123,3 +123,44 @@ export async function updateUserProfile(data, id){
     throw new Error(err.message)
   }
 }
+
+export async function verifyOtp(data) {
+  try {
+    const response = await api.post("verify_email/", data);
+    return response.data;
+  } catch (err) {
+    throw new Error(err.response?.data?.message || "OTP verification failed");
+  }
+}
+
+export const resendOtp = async (email) => {
+  const response = await api.post("resend-otp/", { email });
+  return response.data;
+};
+
+export async function requestPasswordReset(email) {
+  try {
+    const response = await api.post("forgot-password/", { email });
+    return response.data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.message || "Failed to request password reset"
+    );
+  }
+}
+
+export async function resetPassword(data) {
+  try {
+    const response = await api.post("reset_password/", data);
+    return response.data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.detail ||
+      err.response?.data?.message ||
+      "Failed to reset password"
+    );
+  }
+}
+
+
+

@@ -79,6 +79,10 @@ const LoginPage = ({ setIsAuthenticated, setUsername }) => {
         )}
       </div>
 
+      <p className="text-[14px]">
+         <Link to="/reset_password_request">Forgot password?</Link>
+      </p>
+
       <div className="w-full flex items-center justify-center flex-col my-4">
         <button disabled={mutation.isPending} className="bg-[#4B6BFB] text-white w-full py-3 px-2 rounded-md flex items-center justify-center gap-2">
           {mutation.isPending ? (

@@ -34,14 +34,21 @@ const SignupPage = ({userInfo, updateForm, toggleModal}) => {
 
   const mutation = useMutation({
     mutationFn: (data) => registerUser(data),
-    onSuccess: () => {
-      toast.success("User created successfully");
-      navigate("/login")
+    onSuccess: (responseData, variables) => {
+      toast.success(`We have sent an OTP to ${variables.email}`)
+      navigate("/verify_email", { state: { email: variables.email } })
       reset();
     },
-
-    onError: (err) => {
-      toast.error(err.message);
+    onError: (error) => {
+      if (error?.response?.status === 429) {
+          toast.error("You have reached the OTP resend limit for today. Please try again tomorrow.");
+          return;
+        } else if (error?.response?.status === 400) {
+          toast.error("Email already registered and verified");
+          navigate("/login");
+      } else {
+          toast.error(error.message || "Something went wrong. Please try again.");
+      }
     },
   });
 
@@ -305,7 +312,7 @@ const SignupPage = ({userInfo, updateForm, toggleModal}) => {
 
           :
 
-          <button className="bg-[#4B6BFB] text-white w-full py-3 px-2 rounded-md flex items-center justify-center gap-2">
+          <button className="cursor-pointer bg-[#4B6BFB] text-white w-full py-3 px-2 rounded-md flex items-center justify-center gap-2">
             {mutation.isPending ? (
               <>
                 {" "}
