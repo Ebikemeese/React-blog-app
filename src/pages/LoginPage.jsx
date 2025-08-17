@@ -7,12 +7,15 @@ import { signin } from "@/services/apiBlog";
 import { toast } from "react-toastify";
 import SmallSpinner from "@/ui_components/SmallSpinner";
 import { getUsername } from "../services/ApiBlog";
+import { googleSignUp } from "../services/ApiBlog"
+import { useEffect, useState } from "react";
 
 const LoginPage = ({ setIsAuthenticated, setUsername }) => {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const location = useLocation()
   const navigate = useNavigate()
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false)
 
   const mutation = useMutation({
     mutationFn: (data) => signin(data),
@@ -34,6 +37,43 @@ const LoginPage = ({ setIsAuthenticated, setUsername }) => {
   function onSubmit(data) {
     mutation.mutate(data);
   }
+
+  const handleSignInWithGoogle = async (response) => {
+    setIsLoadingGoogle(true);
+    try {
+      const id_token = response.credential;
+      const server_res = await googleSignUp(id_token);
+
+      localStorage.setItem("access_token", server_res.access_token);
+      localStorage.setItem("refresh_token", server_res.refresh_token);
+
+      setIsAuthenticated(true);
+      setUsername(server_res.username);
+
+      toast.success("Signed in with Google successfully");
+
+      const from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+
+    } catch (err) {
+      console.error("Google Sign-In Error:", err.message);
+      toast.error(err.message);
+    } finally {
+      setIsLoadingGoogle(false);
+    }
+  };
+
+  useEffect(() => {
+    // global google
+    google.accounts.id.initialize({
+      client_id: import.meta.env.VITE_CLIENT_ID,
+      callback: handleSignInWithGoogle
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme: 'outline', size: 'large', text: 'continue with', shape: 'circle', width: '200'}
+    )
+  }, [])
 
   return (
     <form
@@ -96,6 +136,30 @@ const LoginPage = ({ setIsAuthenticated, setUsername }) => {
             <small className="text-[16px]">Login</small>
           )}
         </button>
+
+        <div className="googleContainer my-4" style={{ position: "relative" }}>
+          <div
+            id="signInDiv"
+            style={{
+              pointerEvents: isLoadingGoogle ? "none" : "auto",
+              opacity: isLoadingGoogle ? 0.5 : 1,
+            }}
+          ></div>
+          {isLoadingGoogle && (
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 10,
+              }}
+            >
+              <SmallSpinner />
+            </div>
+          )}
+        </div>
+
         <p className="text-[14px]">
           Don't have an account? <Link to="/signup"> Sign-up</Link>
         </p>

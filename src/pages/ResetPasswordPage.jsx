@@ -68,7 +68,7 @@ const ResetPasswordPage = () => {
         )}
       </div>
 
-      <div>
+      <div> import serializers
         <Label htmlFor="confirmPassword">Confirm Password</Label>
         <Input
           type="password"

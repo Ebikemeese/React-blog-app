@@ -46,7 +46,7 @@ const App = () => {
             <Route path="*" element={<NotFoundPage />} />
             <Route index element={<HomePage />} />
             <Route path="blogs/:slug" element={<DetailPage username={username} IsAuthenticated={IsAuthenticated} />} />
-            <Route path="signup" element={<SignupPage />} />
+            <Route path="signup" element={<SignupPage setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
             <Route path="create_blog" element={ <ProtectedRoute> <CreatePostPage IsAuthenticated={IsAuthenticated} /> </ProtectedRoute> } />
             <Route path="login" element={ <LoginPage setIsAuthenticated={ setIsAuthenticated } setUsername={setUsername} /> } />
             <Route path="profile/:username" element={<ProfilePage authUsername={username} /> } />

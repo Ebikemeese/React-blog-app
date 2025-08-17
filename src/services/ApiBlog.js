@@ -162,5 +162,16 @@ export async function resetPassword(data) {
   }
 }
 
+export async function googleSignUp(id_token) {
+  try {
+    const response = await api.post("auth/google/", { id_token });
+    return response.data;
+  } catch (err) {
+    if (err.response?.status === 401) {
+      throw new Error("Invalid Google credentials");
+    }
+    throw new Error(err.response?.data?.message || "Google sign-in failed");
+  }
+}
 
 
