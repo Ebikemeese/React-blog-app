@@ -18,6 +18,7 @@ const ForgotPasswordPage = () => {
         },
         onError: (error) => {
         toast.error(error.message || "Failed to send reset email");
+        console.log(error.message)
         },
     });
 

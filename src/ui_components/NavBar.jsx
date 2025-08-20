@@ -11,6 +11,7 @@ const NavBar = ({darkMode, handleDarkMode, IsAuthenticated, username, setUsernam
   function logout(){
     localStorage.removeItem("access")
     localStorage.removeItem("refresh")
+    localStorage.removeItem("github_code_used")
     setIsAuthenticated(false)
     setUsername(null)
   }

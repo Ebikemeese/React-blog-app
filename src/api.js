@@ -8,23 +8,36 @@ const api = axios.create({
 })
 
 //to get logged in user username(first_name)
-api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem("access")
-        if(token){
-            const decoded = jwtDecode(token)
-            const expiry_date = decoded.exp
-            const current_time = Date.now()/1000
-            if(expiry_date > current_time){
-                config.headers.Authorization = `Bearer ${token}`
-            }
-        }
-        return config;
-    },
+const PUBLIC_ENDPOINTS = ["forgot-password", "login"];
 
-    (error) => {
-        return Promise.reject(error)
+api.interceptors.request.use(
+  (config) => {
+    const isPublic = PUBLIC_ENDPOINTS.some((endpoint) =>
+      config.url.includes(endpoint)
+    );
+
+    if (isPublic) return config;
+
+    const token = localStorage.getItem("access");
+    if (token && token.split(".").length === 3) {
+      try {
+        const decoded = jwtDecode(token);
+        const expiry_date = decoded.exp;
+        const current_time = Date.now() / 1000;
+
+        if (expiry_date > current_time) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+      } catch (err) {
+        console.warn("Token decoding failed:", err.message);
+        localStorage.removeItem("access");
+      }
     }
-)
+
+    return config;
+  },
+
+  (error) => Promise.reject(error)
+);
 
 export default api

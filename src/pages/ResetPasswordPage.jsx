@@ -7,6 +7,8 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import { resetPassword } from "@/services/apiBlog"; // Make sure this function is defined
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useState } from "react";
 
 const ResetPasswordPage = () => {
   const { register, handleSubmit, formState, watch } = useForm();
@@ -14,6 +16,16 @@ const ResetPasswordPage = () => {
   const password = watch("password");
   const { uidb64, token } = useParams();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const togglePassword2Visibility = () => {
+    setShowPassword2((prev) => !prev);
+  };
 
   const mutation = useMutation({
     mutationFn: async (data) => {
@@ -48,10 +60,10 @@ const ResetPasswordPage = () => {
         <h3 className="font-semibold text-2xl">Reset Password Form</h3>
       </div>
 
-      <div>
+      <div className="relative w-[300px]">
         <Label htmlFor="password">Password</Label>
         <Input
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           placeholder="Enter password"
           {...register("password", {
@@ -63,15 +75,22 @@ const ResetPasswordPage = () => {
           })}
           className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[300px]"
         />
+        <button
+          type="button"
+          onClick={togglePasswordVisibility}
+          className="absolute right-2 top-[27px] text-[#141624] dark:text-[#e2e8f0]"
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </button>
         {errors?.password?.message && (
           <small className="text-red-700">{errors.password.message}</small>
         )}
       </div>
 
-      <div> import serializers
+      <div className="relative w-[300px]">
         <Label htmlFor="confirmPassword">Confirm Password</Label>
         <Input
-          type="password"
+          type={showPassword2 ? "text" : "password"}
           id="confirmPassword"
           placeholder="Confirm password"
           {...register("confirmPassword", {
@@ -85,6 +104,13 @@ const ResetPasswordPage = () => {
           })}
           className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[300px]"
         />
+        <button
+          type="button"
+          onClick={togglePassword2Visibility}
+          className="absolute right-2 top-[27px] text-[#141624] dark:text-[#e2e8f0]"
+        >
+          {showPassword2 ? <FaEyeSlash /> : <FaEye />}
+        </button>
         {errors?.confirmPassword?.message && (
           <small className="text-red-700">
             {errors.confirmPassword.message}

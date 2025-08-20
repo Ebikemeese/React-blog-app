@@ -54,7 +54,13 @@ export async function signin(data){
 
 export async function getUsername(){
   try{
-    const response = await api.get("get_username")
+    const accessToken = localStorage.getItem("access_token");
+
+    const response = await api.get("get_username", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
     return response.data
 
   } catch(err) {
@@ -143,11 +149,18 @@ export async function requestPasswordReset(email) {
     const response = await api.post("forgot-password/", { email });
     return response.data;
   } catch (err) {
-    throw new Error(
-      err.response?.data?.message || "Failed to request password reset"
-    );
+    console.log("Full error object:", err);
+    console.log("Error response:", err.response);
+    console.log("Error status:", err.response?.status);
+    console.log("Error data:", err.response?.data);
+
+    const errorMessage =
+      err.response?.data?.message || "Failed to request password reset";
+    throw new Error(errorMessage);
   }
 }
+
+
 
 export async function resetPassword(data) {
   try {
@@ -165,13 +178,57 @@ export async function resetPassword(data) {
 export async function googleSignUp(id_token) {
   try {
     const response = await api.post("auth/google/", { id_token });
-    return response.data;
+    return { success: true, data: response.data };
   } catch (err) {
-    if (err.response?.status === 401) {
-      throw new Error("Invalid Google credentials");
-    }
-    throw new Error(err.response?.data?.message || "Google sign-in failed");
+    const errorData = err.response?.data || {};
+    return {
+      success: false,
+      error: {
+        message: errorData.message || "Google sign-in failed",
+        email: errorData.email,
+        auth_provider: errorData.auth_provider
+      }
+    };
   }
 }
+
+export async function githubSignIn(code) {
+  try {
+    const response = await api.post("auth/github/", { code });
+    
+    return { success: true, data: response.data };
+  } catch (err) {
+    console.log("GitHub Sign-In Error Response:", err.response?.data?.error);
+
+    const error = err.response?.data?.error || {};
+    let message = error.message || "GitHub sign-in failed";
+    let email = null;
+    let auth_provider = null;
+
+    // If detail is a string, extract values using regex
+    if (typeof error.detail === "string") {
+      const detailStr = error.detail;
+
+      const messageMatch = detailStr.match(/message=.*?'(.*?)'/);
+      const emailMatch = detailStr.match(/email=.*?'(.*?)'/);
+      const providerMatch = detailStr.match(/auth_provider=.*?'(.*?)'/);
+
+      if (messageMatch) message = messageMatch[1];
+      if (emailMatch) email = emailMatch[1];
+      if (providerMatch) auth_provider = providerMatch[1];
+    }
+
+    return {
+      success: false,
+      error: {
+        message,
+        email,
+        auth_provider
+      }
+    };
+  }
+}
+
+
 
 

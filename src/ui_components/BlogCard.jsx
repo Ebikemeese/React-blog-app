@@ -1,14 +1,12 @@
 import Badge from './Badge'
 import CardFooter from './CardFooter'
-import thumbnail from "../images/design_vii.jpg"
 import { Link } from 'react-router-dom'
-import { BASE_URL } from "@/api";
 
 const BlogCard = ({blog}) => {
   return (
     <div className="px-3 py-3 rounded-md w-[300px] h-auto flex flex-col gap-4 border-gray-300 dark:border-gray-800 border shadow-lg">
       <div className="w-full h-[200px] border-gray-300 border rounded-md overflow-hidden">
-        <Link to={ `blogs/${blog.slug}` }>
+        <Link to={`/blogs/${blog.slug}`}>
           <img
             src={`${blog.featured_image}`}
             className="w-full h-full object-cover rounded-lg"
@@ -18,7 +16,7 @@ const BlogCard = ({blog}) => {
 
       <Badge blog={blog} />
 
-      <Link to={ `blogs/${blog.slug}` }>
+      <Link to={`/blogs/${blog.slug}`}>
         <h3 className="font-semibold  leading-normal text-[#181A2A] mb-0 dark:text-white">
           {blog.title}
         </h3>
