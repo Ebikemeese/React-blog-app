@@ -20,6 +20,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { getUsername } from "./services/ApiBlog";
+import * as Sentry from "@sentry/react";
+
 
 const App = () => {
 
@@ -63,4 +65,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);
