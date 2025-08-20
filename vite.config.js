@@ -10,6 +10,7 @@ export default defineConfig({
     org: "giftweb-0t",
     project: "react-blog-app"
   })],
+  base: "/React-blog-app",
 
   resolve: {
     alias: {
