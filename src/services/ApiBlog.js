@@ -229,6 +229,19 @@ export async function githubSignIn(code) {
   }
 }
 
+export async function changePassword({ password, confirm_password, old_password }) {
+  try {
+    const response = await api.post("change-password/", {
+      password,
+      confirm_password,
+      old_password,
+    });
 
+    return response.data;
+  } catch (error) {
+    // Forward the full error response to the component
+    throw error;
+  }
+}
 
 

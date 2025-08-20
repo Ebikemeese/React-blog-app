@@ -3,10 +3,14 @@ import { FaHamburger } from "react-icons/fa"
 import ResponsiveNavBar from "./ResponsiveNavBar"
 import { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+
 
 const NavBar = ({darkMode, handleDarkMode, IsAuthenticated, username, setUsername, setIsAuthenticated}) => {
 
   const [showNavBar, setShowNavBar] = useState(false)
+  const navigate = useNavigate()
 
   function logout(){
     localStorage.removeItem("access")
@@ -14,6 +18,8 @@ const NavBar = ({darkMode, handleDarkMode, IsAuthenticated, username, setUsernam
     localStorage.removeItem("github_code_used")
     setIsAuthenticated(false)
     setUsername(null)
+    navigate("/login")
+    toast.success("Successfully signed-out")
   }
 
   return (
@@ -33,6 +39,14 @@ const NavBar = ({darkMode, handleDarkMode, IsAuthenticated, username, setUsernam
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Welcome {username}!
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/change_password"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Change Password
                 </NavLink>
               </li>
               <li onClick={logout} className="cursor-pointer">Logout</li>

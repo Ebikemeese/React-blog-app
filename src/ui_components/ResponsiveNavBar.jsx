@@ -17,6 +17,14 @@ const ResponsiveNavBar = ({username, logout, IsAuthenticated}) => {
                   Welcome {username}!
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/change_password"
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Change Password
+                </NavLink>
+              </li>
               <li onClick={logout} className="cursor-pointer">Logout</li>
             </>
             : 

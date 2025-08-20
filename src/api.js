@@ -4,7 +4,10 @@ import { jwtDecode } from "jwt-decode";
 export const BASE_URL = 'http://127.0.0.1:8000/api/v1/'
 
 const api = axios.create({
-    baseURL: BASE_URL
+    baseURL: BASE_URL,
+    headers: {
+    Authorization: `Bearer ${localStorage.getItem("access")}`,
+  },
 })
 
 //to get logged in user username(first_name)

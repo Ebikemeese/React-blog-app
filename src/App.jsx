@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage"
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 import ProtectedRoute from "./ui_components/ProtectedRoute";
 import { useEffect, useState } from "react"
 import {
@@ -53,6 +54,7 @@ const App = () => {
             <Route path="verify_email" element={<VerifyEmailPage />} />
             <Route path="reset_password/:uidb64/:token" element={<ResetPasswordPage />} />
             <Route path="reset_password_request" element={<ForgotPasswordPage />} />
+            <Route path="change_password" element={<ChangePasswordPage setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />} />
             
           </Route>
         </Routes>
