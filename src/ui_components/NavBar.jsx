@@ -81,7 +81,16 @@ const NavBar = ({darkMode, handleDarkMode, IsAuthenticated, username, setUsernam
         <FaHamburger className="text-2xl cursor-pointer hidden max-md:block dark:text-white" onClick={() => setShowNavBar(curr => !curr)} />
       </nav>
 
-      {showNavBar && <ResponsiveNavBar IsAuthenticated={IsAuthenticated} username={username} logout={logout} />}
+    {showNavBar && 
+    <ResponsiveNavBar 
+      IsAuthenticated={IsAuthenticated} 
+      username={username} 
+      logout={logout} 
+      showNavBar={showNavBar}
+      setShowNavBar={setShowNavBar} 
+    />
+    
+    }
     </>
   );
 };
