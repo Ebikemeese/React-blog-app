@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
-export const BASE_URL = 'https://blogify-yt4f.onrender.com/api/v1/'
+export const BASE_URL = import.meta.env.VITE_BASE_URL
 // export const BASE_URL = 'http://127.0.0.1:8000/api/v1/'
 
 const api = axios.create({
