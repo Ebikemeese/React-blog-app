@@ -1,9 +1,6 @@
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa";
-import { BsTwitterX } from "react-icons/bs";
-import { FaYoutube } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
-
+import { FaEnvelope } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -66,12 +63,20 @@ const Footer = () => {
         </button>
       </div>
     </div>
+    <div className="-py-1 flex items-center gap-6 cursor-pointer max-md:mt-6 max-md:justify-center">
+      <p className="text-[#696A75] items-center text-[16px] mb-5 dark:text-[#97989F]">
+        Developed by Ebikeme Ese
+      </p>
+    </div>
+    <div className="flex items-center gap-6 cursor-pointer max-md:mt-6 max-md:justify-center">
+      <a href="mailto:ebikemeese@gmail.com?subject=Blogify" target="_blank">
+        <FaEnvelope className="dark:text-white text-[20px] text-[#141624]" />
+      </a>
+      <a href="https://wa.me/2348123208257" target="_blank">
+        <FaWhatsapp className="dark:text-white text-[20px] text-[#141624]" />
+      </a>
 
-    <div className="py-3 flex items-center gap-6 cursor-pointer max-md:mt-6 max-md:justify-center">
-      <FaInstagram className="dark:text-white text-[20px] text-[#141624]" />
-      <FaFacebookF className="dark:text-white text-[20px] text-[#141624]" />
-      <BsTwitterX className="dark:text-white text-[20px] text-[#141624]" />
-      <FaYoutube className="dark:text-white text-[20px] text-[#141624]" />
+      
     </div>
   </footer>
   )
