@@ -6,9 +6,7 @@ export const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const api = axios.create({
     baseURL: BASE_URL,
-    headers: {
-    Authorization: `Bearer ${localStorage.getItem("access")}`,
-  },
+    
 })
 
 //to get logged in user username(first_name)
