@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     
-      <BrowserRouter>
+      <BrowserRouter basename="/React-blog-app">
         <Routes>
           <Route path="/" element={<AppLayout IsAuthenticated={IsAuthenticated} username={username} setIsAuthenticated={setIsAuthenticated} setUsername={setUsername} />}>
 
