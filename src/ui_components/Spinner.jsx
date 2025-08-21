@@ -11,7 +11,7 @@ const Spinner = () => {
   return (
     <ClipLoader
         cssOverride={override}
-        size={450}
+        size={350}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
