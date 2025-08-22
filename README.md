@@ -41,5 +41,8 @@ It features **user authentication (with email OTP + social login via Google/GitH
 | Monitoring       | Sentry                                     |
 | Database         | **SQLite (dev)** / **PostgreSQL (prod)**   |
 | API              | RESTful endpoints, JWT/Token-based auth    |
+### 🔗 Live Demo  
+Copy and paste the link below into your browser:
 
-👉 [View Live Demo](https://ebikemeese.github.io/React-blog-app/)
+```
+https://ebikemeese.github.io/React-blog-app/
