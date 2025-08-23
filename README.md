@@ -1,12 +1,48 @@
-# React + Vite
+# React-Django Blog App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack content management system built with **React** on the frontend and **Django + Django REST Framework** on the backend.  
 
-Currently, two official plugins are available:
+It features **user authentication (with email OTP + social login via Google/GitHub)**, password reset/change functionality, CRUD operations for blogs and profiles, and **Sentry integration** for error monitoring.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend** → Hosted on **GitHub Pages**  
+- **Backend** → Hosted on **Render**  
+- **Database** → **PostgreSQL** in production, **SQLite** in development  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Features
+
+- **User Authentication**
+  - Register/login with email + password.
+  - OTP-based email confirmation.
+  - Password reset & password change.
+  - **Social login via Google or GitHub**.
+
+- **Blog Management**
+  - CRUD operations on blog posts.
+  - Update/manage user profile.
+
+- **Error Monitoring**
+  - **Sentry** integration for error tracking.
+
+- **Database**
+  - Development → **SQLite** (default Django DB).
+  - Production → **PostgreSQL** (via Render).
+
+---
+
+## 🛠 Tech Stack
+
+| Component         | Technology                                |
+|------------------|--------------------------------------------|
+| Frontend         | React, Taillwind CSS, GitHub Pages deployment             |
+| Backend          | Django, Django REST Framework (DRF), Render hosting |
+| Auth & Email     | OTP-based email confirmation, social login (Google, GitHub) |
+| Monitoring       | Sentry                                     |
+| Database         | **SQLite (dev)** / **PostgreSQL (prod)**   |
+| API              | RESTful endpoints, JWT/Token-based auth    |
+### 🔗 Live Demo  
+Copy and paste the link below into your browser:
+
+```
+https://ebikemeese.github.io/React-blog-app/
