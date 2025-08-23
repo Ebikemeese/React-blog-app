@@ -106,7 +106,7 @@ const ChangePasswordPage = ({ setUsername, setIsAuthenticated }) => {
         )}
       </div>
 
-      <div className="relative w-[300px]">
+      <div className="relative w-[298px]">
         <Label htmlFor="password">Current Password</Label>
         <Input
           type={showPassword ? "text" : "password"}
@@ -119,7 +119,7 @@ const ChangePasswordPage = ({ setUsername, setIsAuthenticated }) => {
               message: "Password must be at least 8 characters",
             },
           })}
-          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[300px]"
+          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[29800px]"
         />
         <button
           type="button"
