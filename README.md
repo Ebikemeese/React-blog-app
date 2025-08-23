@@ -35,7 +35,7 @@ It features **user authentication (with email OTP + social login via Google/GitH
 
 | Component         | Technology                                |
 |------------------|--------------------------------------------|
-| Frontend         | React, GitHub Pages deployment             |
+| Frontend         | React, Taillwind CSS, GitHub Pages deployment             |
 | Backend          | Django, Django REST Framework (DRF), Render hosting |
 | Auth & Email     | OTP-based email confirmation, social login (Google, GitHub) |
 | Monitoring       | Sentry                                     |
