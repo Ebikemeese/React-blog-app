@@ -201,8 +201,11 @@ const SignupPage = ({userInfo, updateForm, toggleModal, setIsAuthenticated, setU
 
   return (
     <form
-      className={`${updateForm && "h-[90%] overflow-auto"} md:px-16 px-8 py-6 flex flex-col mx-auto my-9 items-center gap-4 w-fit 
-    rounded-lg bg-[#FFFFFF] shadow-xl dark:text-white dark:bg-[#141624]`}
+      className={`${updateForm && "h-[90%] overflow-auto"} 
+      md:px-16 px-8 py-6 flex flex-col mx-auto my-9 items-center
+      gap-4 w-fit rounded-lg
+    bg-[#FFFFFF] shadow-xl dark:text-white 
+    dark:bg-[#141624]`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex flex-col gap-2 justify-center items-center mb-2">

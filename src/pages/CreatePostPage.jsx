@@ -93,7 +93,7 @@ const CreatePostPage = ({blog, IsAuthenticated}) => {
           id="title"
           {...register("title", {required: "Blog title is required", minLength: {value:3, message: "The title must be at least 3 characters"} })}
           placeholder="Give your post a title"
-          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[400px]"
+          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[40px] w-[300px]"
         />
         {errors?.title?.message && <InputError error={errors.title.message} />}
       </div>
@@ -103,7 +103,7 @@ const CreatePostPage = ({blog, IsAuthenticated}) => {
         <Textarea
           id="content"
           placeholder="Write your blog post"
-          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[180px] w-[400px] text-justify"
+          className="border-2 border-[#141624] dark:border-[#3B3C4A] focus:outline-0 h-[180px] w-[300px] text-justify"
           {...register("content", {required: "Blog content is required", minLength: {value:10, message: "The content must be at least 10 characters"}})}
         />
         {errors?.content?.message && <InputError error={errors.content.message} />}
